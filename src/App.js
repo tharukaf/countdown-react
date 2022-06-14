@@ -1,25 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react"
+import Numbers from './components/Numbers'
+import Letters from './components/Letters'
+import Home from './components/Home'
 
-function App() {
+export default function App() {
+
+  const [newGame, setNewGame] = React.useState(true)
+  const [gameMode, setGameMode] = React.useState("letters")
+  const [playerName, setPlayerName] = React.useState("")
+
+  function gameModeToggle() {
+    setGameMode(prevState => {
+      return prevState === "letters" ? "numbers" : "letters"
+    })
+  }
+
+  function handleChange(event) {
+    const { name, value } = event.target
+    setPlayerName(prevFormData => {
+      console.log(value)
+      return {
+        ...prevFormData,
+        [name]: value
+      }
+    })
+  }
+
+  function createNewGame() {
+    setNewGame(prevState => !prevState)
+  }
+
+  console.log(gameMode)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <>
+      {/* {newGame && <Home
+        gameModeToggle={gameModeToggle}
+        handleChange={handleChange}
+        playerName={playerName}
+        newGame={createNewGame} />}
 
-export default App;
+      {gameMode}
+
+      {gameMode === "letters" && !newGame && <Letters letters={letters} />}
+      {gameMode === "numbers" && !newGame && <Numbers />} */}
+
+
+      <Letters />
+    </>
+  )
+}
