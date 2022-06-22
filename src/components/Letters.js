@@ -1,5 +1,6 @@
 import React from 'react'
 import { useEffect } from "react"
+import Card from './Card'
 import { nanoid } from 'nanoid'
 
 export default function Letters(props) {
@@ -22,7 +23,7 @@ export default function Letters(props) {
     // Mapping over the letters arrays to get JSX elements
     const letterElements = letters.map(letter => {
         return (
-            <div key={nanoid()}>{letter}</div>
+            <Card key={nanoid()} value={letter} />
         )
     })
 

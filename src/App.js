@@ -45,7 +45,7 @@ export default function App() {
       {gameMode === "numbers" && !newGame && <Numbers />} */}
 
 
-      <Letters />
+      <Numbers />
     </>
   )
 }
