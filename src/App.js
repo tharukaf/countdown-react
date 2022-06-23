@@ -2,6 +2,9 @@ import React from "react"
 import Numbers from './components/Numbers'
 import Letters from './components/Letters'
 import Home from './components/Home'
+import Navbar from './components/Navbar'
+import '../src/styles/main.css'
+import './styles/card.css'
 
 export default function App() {
 
@@ -16,36 +19,36 @@ export default function App() {
   }
 
   function handleChange(event) {
-    const { name, value } = event.target
-    setPlayerName(prevFormData => {
-      console.log(value)
-      return {
-        ...prevFormData,
-        [name]: value
-      }
-    })
+    setPlayerName(event.target.value)
   }
 
   function createNewGame() {
     setNewGame(prevState => !prevState)
   }
 
+  function reset() {
+    setNewGame(true)
+  }
+
   console.log(gameMode)
   return (
-    <>
-      {/* {newGame && <Home
-        gameModeToggle={gameModeToggle}
-        handleChange={handleChange}
-        playerName={playerName}
-        newGame={createNewGame} />}
+    <div className="container">
 
-      {gameMode}
+      <nav>
+        <Navbar />
+      </nav>
+      <main>
+        {newGame && <Home
+          gameModeToggle={gameModeToggle}
+          handleChange={handleChange}
+          playerName={playerName}
+          newGame={createNewGame} />}
 
-      {gameMode === "letters" && !newGame && <Letters letters={letters} />}
-      {gameMode === "numbers" && !newGame && <Numbers />} */}
+        {gameMode === "letters" && !newGame && <Letters />}
+        {gameMode === "numbers" && !newGame && <Numbers />}
 
-
-      <Numbers />
-    </>
+        {!newGame && <button className="btn-numLetters btn-reset" onClick={reset}>Reset</button>}
+      </main>
+    </div>
   )
 }

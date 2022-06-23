@@ -2,6 +2,7 @@ import React from 'react'
 import { useEffect } from "react"
 import Card from './Card'
 import { nanoid } from 'nanoid'
+import Timer from './Timer'
 
 export default function Letters(props) {
     const [letters, setLetters] = React.useState([])
@@ -12,10 +13,11 @@ export default function Letters(props) {
     const [response, setResponse] = React.useState(false)
     const [invalidWord, setInvalidWord] = React.useState(false)
 
+
     useEffect(() => {
         for (let i = 0; i < 9; i++) {
             setLetters(prevLetters => {
-                return [...prevLetters, "*"]
+                return [...prevLetters, ""]
             })
         }
     }, [])
@@ -50,7 +52,6 @@ export default function Letters(props) {
             return [...newLetterArray]
         })
         setCurrentIndex(prevIndex => prevIndex + 1)
-
     }
 
     // Handle form Data change
@@ -82,15 +83,17 @@ export default function Letters(props) {
     }
 
     return (
-        <>
-            <h1>Letters</h1>
+        <div className="game-container">
+            <h2>LETTERS</h2>
 
-            {letterElements}
+            <div className='card-container'>
+                {letterElements}
+            </div>
 
             {currentIndex < 9 &&
                 <div>
-                    <button onClick={setRandomVowel}>Vowel</button>
-                    <button onClick={setRandomConsonant}>Consonant</button>
+                    <button className="btn-numLetters" onClick={setRandomVowel}>VOWEL</button>
+                    <button className="btn-numLetters" onClick={setRandomConsonant}>CONSONANT</button>
                 </div>}
 
             {!(currentIndex < 9) &&
@@ -108,8 +111,8 @@ export default function Letters(props) {
             {response && <h1>You have a {formData.answer.length} letter word</h1>}
             {invalidWord && <h1>Not a word</h1>}
 
+            {!(currentIndex < 9) && <Timer />}
 
-
-        </>
+        </div>
     )
 }

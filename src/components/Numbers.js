@@ -1,6 +1,8 @@
 import { nanoid } from "nanoid";
 import React from "react"
 import Card from "./Card";
+import Timer from "./Timer";
+import TinyTimer from 'tiny-timer';
 
 export default function Numbers() {
 
@@ -9,11 +11,12 @@ export default function Numbers() {
     const [showTarget, setShowTarget] = React.useState(false);
     const [target, setTarget] = React.useState(0);
     const [targetRecall, setTargetRecall] = React.useState([])
+    const [showTimerView, setShowTimerView] = React.useState(false)
 
     React.useEffect(() => {
         for (let i = 0; i < 6; i++) {
             setNumbers(prevNumbers => {
-                return [...prevNumbers, "*"]
+                return [...prevNumbers, ""]
             })
         }
     }, [])
@@ -72,6 +75,7 @@ export default function Numbers() {
         })
     }
 
+    // Returns a set containing two unique indices to access the localNumArray
     function randomIndex(quantity, max) {
         const set = new Set()
         if (max === 1) {
@@ -84,6 +88,7 @@ export default function Numbers() {
         return set
     }
 
+    // Generates the Target value
     function generateTarget() {
         const localNumArray = [...numbers];
         const OPMAP = {
@@ -93,7 +98,6 @@ export default function Numbers() {
             '-': (n1, n2) => n1 - n2
         }
         while (localNumArray.length > 1) {
-
 
             const [randIndex1, randIndex2] = localNumArray.length > 2 ?
                 randomIndex(2, localNumArray.length - 1) :
@@ -127,29 +131,45 @@ export default function Numbers() {
         }
 
 
-        setTarget(localNumArray[0])
         setShowTarget(true)
-        console.log(targetRecall)
+        const timer = new TinyTimer()
+        const timer2 = new TinyTimer()
+        timer.on('tick', () => {
+            const randTarget = Math.floor(Math.random() * 999)
+            setTarget(randTarget)
+        })
+
+        timer.on('done', () => {
+            timer2.on('done', () => {
+                setShowTimerView(true)
+            });
+            timer2.start(1500)
+        })
+
+        timer.start(3000, 200)
+        setTarget(localNumArray[0])
     }
 
     return (
-        <div>
-            <h1>
-                Numbers
-            </h1>
-            {numberElements}
+        <div className="game-container">
+            <h2>NUMBERS</h2>
+            <div className="card-container">
+                {numberElements}
+            </div>
             {currentIndex < 6 && <div>
-                <button id="big" onClick={selectNumber}>Big</button>
-                <button id="small" onClick={selectNumber}>Small</button>
+                <button className="btn-numLetters" id="big" title="Random number from 0-9" onClick={selectNumber}>Big</button>
+                <button className="btn-numLetters" id="small" title="[10, 25, 50, 75, 100]" onClick={selectNumber}>Small</button>
             </div>}
 
             {currentIndex >= 6 && <div>
-                <button onClick={generateTarget}>Generate Target</button>
+                <button className="btn-numLetters btn-generate" onClick={generateTarget}>Generate Target</button>
             </div>}
 
             {showTarget && <>
-                {target}
+                <div className="card">{target}</div>
             </>}
+            <div className="timer">{showTimerView && <Timer />}</div>
+
         </div>
     )
 }

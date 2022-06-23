@@ -1,17 +1,24 @@
-import '../toggle.css'
+import '../styles/toggle.css'
 
 export default function Home(props) {
     return (
         <>
-            <h1>Welcome to Countdown</h1>
-            <div>
+
+            <div className="form-container">
                 <input type="text"
                     placeholder="Player Name"
-                    onChange={props.handleChange} />
-                <input type="checkbox" id="switch"
-                    onChange={props.gameModeToggle} />
-                <label for="switch">Toggle</label>
-                <button onClick={props.newGame}>New Game</button>
+                    onChange={props.handleChange}
+                    name="playerName"
+                    value={props.playerName}
+                />
+                <div className="toggler">
+                    <p className="toggler-text">LETTERS</p>
+                    <input type="checkbox" id="switch"
+                        onChange={props.gameModeToggle} />
+                    <label for="switch">Toggle</label>
+                    <p className="toggler-text">NUMBERS</p>
+                </div>
+                <button className="btn-numLetters" onClick={props.newGame}>New Game</button>
             </div>
         </>
     )
