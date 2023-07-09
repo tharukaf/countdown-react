@@ -1,0 +1,28 @@
+.top-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #013E77;
+    padding: 1rem;
+}
+
+.score-text {
+    color: white;
+    font-size: 3.3rem;
+    font-family: 'Inter';
+    font-weight: 900;
+}
+
+.score-text2 {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 24px;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.01em;
+}

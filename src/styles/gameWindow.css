@@ -1,0 +1,317 @@
+.game-window {
+    font-family: 'inter';
+    display: flex;
+    flex-direction: column;
+    border-radius: 40px 40px 36px 36px;
+    background: linear-gradient(112.79deg, #001629 11.19%, #005099 103.58%);
+    filter: drop-shadow(0px 5px 7px rgba(0, 0, 0, 0.25));
+    height: 705px;
+    width: 956px;
+    align-items: center;
+}
+
+.title-section {
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    margin: 0;
+    background: linear-gradient(180deg, #FFFFFF 0%, #6D8D9B 100%);
+    border-radius: 36px 36px 0 0;
+    color: black;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 100px;
+    line-height: 100px;
+    width: 956px;
+    /* or 100% */
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.07em;
+}
+
+.init-form {
+    background: rgba(47, 47, 47, 0.5);
+    color: white;
+    height: 100%;
+    margin: 15px;
+    padding: 3%;
+    border-radius: 19px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 393px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(7.9px);
+    -webkit-backdrop-filter: blur(7.9px);
+    border: 1px solid rgba(64, 36, 156, 0.22);
+}
+
+.init-form-button-flex {
+    display: flex;
+    flex-direction: row;
+}
+
+.single-round-buttons {
+    padding: 10px;
+    margin: 3px;
+    background: linear-gradient(180deg, #D0D0D0 48.44%, #A4A4A4 100%);
+    border-radius: 153px;
+    color: black;
+    font-size: 14px;
+}
+
+.single-round-buttons:hover {
+    background: #477097;
+    transition-duration: 0.1s;
+    transition-timing-function: ease-in;
+}
+
+.toggle {
+    width: 64.55px;
+    height: 32.52px;
+    background: #FFFFFF;
+    border-radius: 48px;
+}
+
+.player-toggle-section {
+    width: 281px;
+    height: 49.02px;
+    background: linear-gradient(180deg, #D0D0D0 48.44%, #A4A4A4 100%);
+    border-radius: 153px;
+    flex-direction: row;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: black;
+    font-family: 'Inter';
+    font-weight: 700;
+}
+
+input[type=checkbox] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+}
+
+label {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 80px;
+    height: 40px;
+    background: rgb(255, 255, 255);
+    display: block;
+    border-radius: 50px;
+    position: relative;
+}
+
+label:after {
+    content: '';
+    position: absolute;
+    top: 1.7px;
+    left: 4px;
+    width: 37px;
+    height: 37px;
+    background: #013a6f;
+    border-radius: 45px;
+    transition: 0.2s;
+}
+
+input:checked+label {
+    background: hsl(0, 0%, 100%);
+}
+
+input:checked+label:after {
+    left: calc(100% - 5px);
+    transform: translateX(-100%);
+}
+
+label:active:after {
+    width: 55px;
+}
+
+.text-player-number {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    /* or 500% */
+    letter-spacing: -0.01em;
+    color: #C7C7C7;
+}
+
+.text-mode {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 20px;
+    /* or 500% */
+    letter-spacing: -0.01em;
+    color: #C7C7C7;
+}
+
+.text-round-type {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: -0.01em;
+
+    color: #C7C7C7;
+}
+
+.button-new-game {
+    width: 260px;
+    height: 54px;
+    background: linear-gradient(180deg, rgba(239, 239, 239, 0.96) 0%, rgba(239, 239, 239, 0) 180.56%);
+    mix-blend-mode: normal;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-new-game:hover {
+    background-color: #e4e4e4;
+    transition-duration: 0.2s;
+}
+
+.text-new-game-button {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 782;
+    font-size: 20px;
+    /* or 500% */
+
+
+    letter-spacing: -0.07em;
+
+    color: #000000;
+    font-variation-settings: 'slnt' 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.numLetters-container {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-numLetters {
+    width: 130px;
+    margin: 0 13px;
+    height: 54px;
+    background: linear-gradient(180deg, rgba(239, 239, 239, 0.96) 0%, rgba(239, 239, 239, 0) 180.56%);
+    mix-blend-mode: normal;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 782;
+    font-size: 20px;
+    letter-spacing: -0.07em;
+    color: #000000;
+    font-variation-settings: 'slnt' 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-numLetters:hover {
+    background-color: #e4e4e4;
+    transition-duration: 0.2s;
+}
+
+.btn-numLetters-long {
+    width: 260px;
+    margin: 0 13px;
+    height: 54px;
+    background: linear-gradient(180deg, rgba(239, 239, 239, 0.96) 0%, rgba(239, 239, 239, 0) 180.56%);
+    mix-blend-mode: normal;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 782;
+    font-size: 20px;
+    letter-spacing: -0.07em;
+    color: #000000;
+    font-variation-settings: 'slnt' 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.counter-block {
+    margin: 10px;
+    font-size: small;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.counter {
+    display: flex;
+    flex: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 50px;
+    height: 20px;
+}
+
+.btn-subtract {
+    background: #9D99AD;
+    border-radius: 15px 0 0 15px;
+    width: 100%;
+    text-align: center;
+    padding: 4px;
+    color: #000000;
+    font-family: 'Inter';
+    font-weight: 500;
+}
+
+.btn-add:hover {
+    background-color: #477097;
+    transition: 0.5s;
+}
+
+.btn-subtract:hover {
+    background-color: #477097;
+}
+
+.btn-number {
+    background: linear-gradient(180deg, #D0D0D0 48.44%, #A4A4A4 100%);
+    width: 100%;
+    text-align: center;
+    padding: 4px;
+    color: #000000;
+    font-family: 'Inter';
+    font-weight: 500;
+}
+
+.btn-add {
+    background: #9D99AD;
+    border-radius: 0 15px 15px 0;
+    width: 100%;
+    text-align: center;
+    padding: 4px;
+    color: #000000;
+    font-family: 'Inter';
+    font-weight: 500;
+
+}
+
+.btn-click :hover {
+    background: #6D8D9B;
+}

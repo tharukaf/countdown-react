@@ -2,31 +2,48 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 55px;
-    height: 55px;
-    border-radius: 13px;
-    font-size: 28px;
+    width: 60px;
+    height: 60px;
     padding: 10px;
     margin: 10px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    background-color: azure;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-    transition: 4s box-shadow;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 782;
+    font-size: 40px;
+    line-height: 100px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.07em;
+    color: #FFFFFF;
+    font-variation-settings: 'slnt' 0;
+    background: #002688;
 }
 
 .card-empty {
-    width: 55px;
-    height: 55px;
-    border-radius: 13px;
-    font-size: 20px;
+    width: 60px;
+    height: 60px;
     padding: 10px;
     margin: 10px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    background-color: azure;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 782;
+    font-size: 40px;
+    line-height: 100px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.07em;
+    overflow: hidden;
+    color: #FFFFFF;
+    font-variation-settings: 'slnt' 0;
+    background-color: #519CBC;
+
 }
 
 .card-container {
     display: flex;
     flex-direction: row;
+    background-color: #F1F1F1;
+
 }
