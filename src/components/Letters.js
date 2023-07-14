@@ -4,6 +4,7 @@ import { nanoid } from 'nanoid'
 import Timer from './Timer'
 import "../styles/main.css"
 import { mTrie } from "../util/dictionaryHelper"
+import DictionaryView from './DictionaryView'
 
 export default function Letters(props) {
 
@@ -43,8 +44,12 @@ export default function Letters(props) {
         )
     })
 
-    const anagramElements = Object.keys(largest).map(key => {
-        return (<div><b>{key}</b>: {largest[key]}</div>)
+    const anagramElements = Object.keys(largest).map(word => {
+        return (
+            <dt
+                key={nanoid()}
+                title={largest[word]}>{word}</dt>
+        )
     })
 
     function handleCardClick(clickedValue, id) {
@@ -105,7 +110,14 @@ export default function Letters(props) {
             props.setGameMode(0)
             props.setIsSingleRound(false)
         } else {
-            props.setGameMode(props.gameModeOrder.shift())
+            props.setGameModeOrder(prev => {
+                if (props.gameModeOrder.length > 0) {
+                    props.setGameMode(prev.shift())
+                } else {
+                    props.setGameMode(0)
+                }
+                return prev
+            })
         }
     }
 
@@ -153,16 +165,22 @@ export default function Letters(props) {
 
     return (
         <div className="game-container">
-            <div className={currentIndex < 9 ? "game-info-card-timer" : "letters-info-card"}>
+            {!showEnterAnswerView && <div className={currentIndex < 9 ? "game-info-card" : "letters-info-card"}>
                 {(currentIndex < 9) && <h1>LETTERS</h1>}
                 {!(currentIndex < 9) && !showEnterAnswerView &&
                     <Timer />}
-                {!(currentIndex < 9) && answer.join('')}
-                {response && <h1>You have a {lastMaxAnswerLength} letter word</h1>}
-                {invalidWord && <h1>Not a word</h1>}
-                {showEndRound && anagramElements}
-            </div>
-
+            </div>}
+            {showEnterAnswerView &&
+                <DictionaryView
+                    currentIndex={currentIndex}
+                    response={response}
+                    lastMaxAnswerLength={lastMaxAnswerLength}
+                    invalidWord={invalidWord}
+                    showEndRound={showEndRound}
+                    anagramElements={anagramElements}
+                    answer={answer}
+                    showEnterAnswerView={showEnterAnswerView}
+                    wordList={Object.keys(largest)} />}
             <div className='card-container'>
                 {letterElements}
             </div>
@@ -194,3 +212,4 @@ export default function Letters(props) {
         </div>
     )
 }
+

@@ -22,13 +22,13 @@ text {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(332deg, #a873db, #a4d09a, #70e346, #ee9b3b, #62bee1);
+    background: linear-gradient(332deg, #a873db, #a4d09a, #cbecbf, #f0ca9f, #62bee1);
     background-size: 1000% 1000%;
 
-    -webkit-animation: background-animation 19s ease infinite;
-    -moz-animation: background-animation 19s ease infinite;
-    -o-animation: background-animation 19s ease infinite;
-    animation: background-animation 19s ease infinite;
+    -webkit-animation: background-animation 25s ease infinite;
+    -moz-animation: background-animation 25s ease infinite;
+    -o-animation: background-animation 25s ease infinite;
+    animation: background-animation 25s ease infinite;
 }
 
 /* background: linear-gradient(180deg, #7353e6 2.43%, rgba(182, 211, 255, 0) 50%); */
@@ -90,9 +90,9 @@ text {
     }
 }
 
-.game-info-card-timer {
-    width: 80%;
-    height: 70%;
+.game-info-card {
+    width: 60%;
+    height: 30%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -100,7 +100,7 @@ text {
     background: linear-gradient(180deg, #D9D9D9 48.44%, #A4A4A4 100%);
 }
 
-.game-info-card {
+.game-info-card-timer {
     transition: width height 1s;
     width: 80%;
     height: 140px;
@@ -112,10 +112,11 @@ text {
 }
 
 .game-container {
-    padding-top: 1.5vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
 }
 
 .game-info-solver {
@@ -124,19 +125,97 @@ text {
     height: 300px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-evenly;
     margin: 20px 0 20px 0;
     background: linear-gradient(180deg, #D9D9D9 48.44%, #A4A4A4 100%);
 }
 
-.timer {
-    width: 100%;
+.game-info-letters {
+    transition: width height 1s;
+    width: 90%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 20px 0 20px 0;
+    background: linear-gradient(180deg, #D9D9D9 48.44%, #A4A4A4 100%);
+}
+
+.game-info-solver-small {
+    transition: width height 1s;
+    width: 50%;
+    height: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 20px 0 20px 0;
+    background: linear-gradient(180deg, #D9D9D9 48.44%, #A4A4A4 100%);
+}
+
+
+.solver-target {
+    height: 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.answer-correct {
+    height: 15%;
+    font-size: 3vh;
+    text-align: center;
+    background: linear-gradient(to right, #FFF 20%, #FF0 40%, #FF0 60%, #FFF 80%);
+    background-size: 200% auto;
+    color: #000;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 1s linear infinite;
+}
+
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
+}
+
+.solve-body-main {
     height: 100%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.timer {
+    height: 100%;
+    aspect-ratio: 1/1;
     border: #7353e6;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.letter-answer-board {
+    height: 70%;
+    width: 60%;
+    padding: 0 10% 0 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.letter-answer-board-scroll {
+    height: 100%;
+    width: 100%;
+    padding: 0 10% 0 10%;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    align-items: center;
 }
 
 .operator-container {
@@ -145,7 +224,7 @@ text {
 }
 
 .clicked-operator {
-    width: 44.6px;
+    width: 100%;
     height: 42.45px;
     display: flex;
     align-items: center;
@@ -158,8 +237,6 @@ text {
     font-weight: 782;
     font-size: 24px;
     line-height: 100px;
-    display: flex;
-    align-items: center;
     text-align: center;
     letter-spacing: -0.07em;
     color: #000000;
@@ -169,7 +246,7 @@ text {
 }
 
 .unclicked-operator {
-    width: 44.6px;
+    width: 100%;
     height: 42.45px;
     display: flex;
     align-items: center;
@@ -182,11 +259,8 @@ text {
     font-weight: 782;
     font-size: 24px;
     line-height: 100px;
-    display: flex;
-    align-items: center;
     text-align: center;
     letter-spacing: -0.07em;
-
     color: #000000;
     font-variation-settings: 'slnt' 0;
     margin: 5px 0 5px 0;
@@ -207,7 +281,6 @@ text {
     align-items: center;
     text-align: center;
     letter-spacing: -0.07em;
-
     color: #d8d8d8;
     font-variation-settings: 'slnt' 0;
     display: flex;
@@ -231,8 +304,12 @@ text {
     flex-direction: column;
     color: #000000;
     font-variation-settings: 'slnt' 0;
+    height: 85%;
 }
 
+.background-img {
+    flex-shrink: 0;
+}
 
 .timer-text-main {
     font-family: 'Inter';
@@ -260,16 +337,64 @@ text {
 
 .letters-info-card {
     width: 18%;
-    height: 140px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 20px 0 20px 0;
     background: linear-gradient(180deg, #D9D9D9 48.44%, #A4A4A4 100%);
+    aspect-ratio: 1;
 }
 
-.letterAnswerBox {
-    display: flex;
-    flex-direction: row;
+.accordion>dt {
+    background-color: black;
+    margin-bottom: 10px;
+    padding: 5px 5px;
+    width: 120px;
+    color: white;
+    toggle: show;
+}
 
+.accordion>dd {
+    margin-bottom: 10px;
+    toggle-visibility: toggle show;
+}
+
+.found-anagram-list {
+    display: grid;
+    border: #000000;
+    width: 100%;
+    grid: auto-flow dense / 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.found-anagram-list>dt {
+    color: white;
+    padding: 5px 5px;
+    margin: 10px 5px 10px;
+    background-color: black;
+}
+
+.letter-response-section {
+    display: flex;
+    margin-top: 2vh;
+    flex-direction: row;
+    align-items: center;
+}
+
+.text-emphasised {
+    font-family: 'Inter';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 30px;
+    text-transform: uppercase;
+}
+
+.emphasised-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #7353e6;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 0 20px 0 20px;
 }

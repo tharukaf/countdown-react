@@ -80,7 +80,7 @@ class Trie {
                     biggestWord = bWord
                     biggestDescription = bDescription
                 }
-                if (bWord.length >= 5 && bWord != biggestWord) {
+                if (bWord.length >= 5 && bWord !== biggestWord) {
                     wordSet.add(bWord)
                 }
                 // console.log(subStr)

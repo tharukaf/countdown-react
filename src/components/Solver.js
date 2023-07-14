@@ -15,6 +15,12 @@ export default function Solver(props) {
         </div>
     })
 
+    const solveSteps = props.targetRecall.map(line => {
+        return <div key={nanoid()}>
+            {line}
+        </div>
+    })
+
     function selectOperator(op) {
         setCurrentOperator(op)
         setCurrentLine(prev => {
@@ -95,9 +101,9 @@ export default function Solver(props) {
         if (output === props.target) {
             assignScore()
             props.setShowRoundOver(() => {
-                // props.setSolveForMe(false)
                 return true
             })
+            props.setShowSolveForMeBtn(false)
         }
 
         props.setCards(prev => {
@@ -131,17 +137,20 @@ export default function Solver(props) {
 
     return (
         <>
-            {props.showRoundOver && <div>ANSWER CORRECT</div>}
-            <div className="solverTarger">
-                Your target is: <b>{props.target}</b>
-            </div>
-            <div className="answer-board">
-                {solverElements}
-                <div>
-                    {currentLine.operand1 !== undefined ? currentLine.operand1 : ""}
-                    {currentLine.operator !== undefined ? currentLineOperatorView() : ""}
-                    {currentLine.operand2 !== undefined ? currentLine.operand2 : ""}
+            <div className="solve-body-main">
+                <div className="solver-target">
+                    <div>Your target is: <b>{props.target}</b></div>
                 </div>
+                <div className="answer-board">
+                    {!props.showSteps && solverElements}
+                    {!props.showSteps && <div>
+                        {currentLine.operand1 !== undefined ? currentLine.operand1 : ""}
+                        {currentLine.operator !== undefined ? currentLineOperatorView() : ""}
+                        {currentLine.operand2 !== undefined ? currentLine.operand2 : ""}
+                    </div>}
+                    {props.showSteps && solveSteps}
+                </div>
+                {props.showRoundOver && <div className="answer-correct">ANSWER CORRECT</div>}
             </div>
             <div className="operator-container">
                 <OperatorButton

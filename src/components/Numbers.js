@@ -14,11 +14,14 @@ export default function Numbers(props) {
     const [target, setTarget] = React.useState(0);
     const [targetRecall, setTargetRecall] = React.useState([])
     const [showTimerView, setShowTimerView] = React.useState(false)
+    const [showSolveForMeBtn, setShowSolveForMeBtn] = React.useState(true)
     const [showSolve, setShowSolve] = React.useState(false)
     const [solveForMe, setSolveForMe] = React.useState(false)
     const [answerNum, setAnswerNum] = React.useState({})
     const [availableCardID, setAvailableCardID] = React.useState(0)
     const [showRoundOver, setShowRoundOver] = React.useState(false)
+    const [showSteps, setShowSteps] = React.useState(false)
+    const tempTarget = React.useRef(0)
 
     function initializeCards() {
         const newCards = []
@@ -41,7 +44,9 @@ export default function Numbers(props) {
     })
 
     function handleSolve() {
-        setSolveForMe(true)
+        if (showTimerView) {
+            setSolveForMe(true)
+        }
     }
 
     function handleCardClick(clickedValue, id) {
@@ -99,17 +104,6 @@ export default function Numbers(props) {
         return operatorArray[randomOpIndex]
     }
 
-    // function pushToRecall(operator, num1, num2, result) {
-    //     setTargetRecall(prevState => {
-    //         return [...prevState, {
-    //             operator: operator,
-    //             num1: num1,
-    //             num2: num2,
-    //             result: result
-    //         }]
-    //     })
-    // }
-
     function pushToRecallString(expression) {
         setTargetRecall(prev => {
             return [...prev, expression]
@@ -129,7 +123,6 @@ export default function Numbers(props) {
         return set
     }
 
-
     // TODO: Fix the generate number function
     // Generates the Target value
     function handleGenerateTarget() {
@@ -144,48 +137,52 @@ export default function Numbers(props) {
             '-': (n1, n2) => n1 - n2
         }
         let steps = 0
-        let count = 0
-        while (steps < 5) {
-            // 
-            count++
-            console.log(`looping ${count}`)
-            // 
-            const [randIndex1, randIndex2] = localNumArray.length > 2 ?
+        let stepBool = localNumArray.length > 1
+        while (stepBool) {
+            let [randIndex1, randIndex2] = localNumArray.length > 2 ?
                 getRandomIndices(2, localNumArray.length - 1) :
-                [0, 1];
+                [0, 1]
 
-            if (count > 20) {
-                break;
-            }
             const randOperator = selectRandOperator()
             const operand_1 = localNumArray[randIndex1]
             const operand_2 = localNumArray[randIndex2]
 
-            const tempTarget = OPMAP[randOperator](operand_1, operand_2)
+            tempTarget.current = OPMAP[randOperator](operand_1, operand_2)
+            const isPossibleTarget = tempTarget.current > 0 && tempTarget.current <= 1000 && tempTarget.current % 1 === 0
 
-            if (tempTarget > 0 && tempTarget % 1 === 0 && tempTarget <= 1000) {
-                steps += 1
+            if (isPossibleTarget) {
+                steps++
 
-                const indexArray = [randIndex1, randIndex2]
-                for (let i = 0; i < 2; i++) {
-                    localNumArray[indexArray[i]] = localNumArray[localNumArray.length - 1]
-                    localNumArray.pop()
+                for (let i = 0; i < localNumArray.length; i++) {
+                    if (localNumArray[i] === operand_1) {
+                        localNumArray[i] = tempTarget.current
+                        break;
+                    }
                 }
-                localNumArray.push(tempTarget)
-                // debugger;
-                console.log(`${operand_1} ${randOperator} ${operand_2}= ${tempTarget}`)
-                pushToRecallString(`${operand_1} ${randOperator} ${operand_2}= ${tempTarget}`)
+                for (let i = 0; i < localNumArray.length; i++) {
+                    if (localNumArray[i] === operand_2) {
+                        localNumArray.splice(randIndex2, 1)
+                        break;
+                    }
+                }
+
+                console.log(`${operand_1} ${randOperator} ${operand_2}= ${tempTarget.current}`)
+                if (!(operand_2 === 1 && (randOperator === '*' || randOperator === '/'))) {
+                    pushToRecallString(`${operand_1} ${randOperator} ${operand_2} = ${tempTarget.current}`)
+                }
+
             }
-        }
-        for (let line of targetRecall) {
-            console.log(line)
+            if (steps >= 3 && tempTarget.current > 100 && tempTarget.current < 1000) {
+                setTarget(tempTarget.current)
+                console.log(`target = ${tempTarget.current}`);
+                stepBool = false
+            }
         }
 
         setShowTarget(true)
 
         // 3 second timer to display random target before showing the acutal target
         const timer = new TinyTimer()
-
         // To be executed on every tick (200ms)
         timer.on('tick', () => {
             const randTarget = Math.floor(Math.random() * 999)
@@ -195,12 +192,12 @@ export default function Numbers(props) {
         // To be executed once the timer is done
         timer.on('done', () => {
             setShowTimerView(true)
+            setTarget(tempTarget.current)
         })
 
         // Start the timer
         timer.start(3000, 200)
         // Show the actual target
-        setTarget(localNumArray[0])
     }
 
     function handleEndRound() {
@@ -208,16 +205,28 @@ export default function Numbers(props) {
             props.setGameMode(0)
             props.setIsSingleRound(false)
         } else {
-            props.setGameMode(props.gameModeOrder.shift())
+            props.setGameModeOrder(prev => {
+                if (props.gameModeOrder.length > 0) {
+                    props.setGameMode(prev.shift())
+                } else {
+                    props.setGameMode(0)
+                }
+                return prev
+            })
         }
+    }
+
+    function handleSolveForMe() {
+        setShowSteps(true)
+        setShowSolveForMeBtn(false)
     }
 
     return (
         <div className="game-container">
 
             <div className={!showTimerView ?
-                "game-info-card-timer" :
-                solveForMe ? "game-info-solver" : "game-info-card"}>
+                "game-info-card" :
+                solveForMe ? "game-info-solver" : "game-info-card-timer"}>
 
                 <h1>{!solveForMe && !showTarget && "NUMBERS"}</h1>
                 <h1>{!solveForMe && showTarget && <div className="target-view-text">{target}</div>}</h1>
@@ -230,7 +239,10 @@ export default function Numbers(props) {
                     setSolveForMe={setSolveForMe}
                     setScore={props.setScore}
                     showRoundOver={showRoundOver}
-                    setShowRoundOver={setShowRoundOver} />}
+                    showSteps={showSteps}
+                    targetRecall={targetRecall}
+                    setShowRoundOver={setShowRoundOver}
+                    setShowSolveForMeBtn={setShowSolveForMeBtn} />}
                 {!solveForMe && showTimerView && <Timer />}
             </div>
 
@@ -261,10 +273,11 @@ export default function Numbers(props) {
                     <div
                         className="btn-numLetters"
                         onClick={handleSolve}>SOLVE</div>}
-                {solveForMe && !showRoundOver &&
+                {showSolveForMeBtn && solveForMe && !showRoundOver &&
                     <div
-                        className="btn-numLetters-long">SOLVE FOR ME</div>}
-                {showRoundOver &&
+                        className="btn-numLetters-long"
+                        onClick={handleSolveForMe}>SOLVE FOR ME</div>}
+                {(showRoundOver || showSteps) &&
                     <div
                         onClick={handleEndRound}
                         className="btn-numLetters-long">End Round</div>}
@@ -274,3 +287,4 @@ export default function Numbers(props) {
         </div>
     )
 }
+

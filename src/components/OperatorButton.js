@@ -1,16 +1,17 @@
 import React from "react";
 
 export default function OperatorButton(props) {
+
     return (
         <>
-            <div
+            <button
                 onClick={props.handleOperatorClick}
                 id={props.name}
                 className={
                     props.currentOperator === props.name ?
                         "clicked-operator"
                         : "unclicked-operator"
-                }>{props.operator}</div>
+                }>{props.operator}</button>
         </>
     )
 }

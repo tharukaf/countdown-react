@@ -2,6 +2,7 @@ import React from 'react'
 import Letters from './Letters'
 import Numbers from './Numbers'
 import '../styles/gameWindow.css'
+import hostimg from '../img/hostImgGroup.png'
 import GameInitForm from './GameInitForm'
 
 export default function GameWindow(props) {
@@ -18,7 +19,11 @@ export default function GameWindow(props) {
                     handleSingleRoundGameClick={props.handleSingleRoundGameClick}
                     handleLetterCount={props.handleLetterCount}
                     handleNumberCount={props.handleNumberCount}
-                    setGameModeOrder={props.setGameModeOrder} />}
+                    setGameModeOrder={props.setGameModeOrder}
+                    gameModeOrder={props.setGameModeOrder}
+                    gameMode={props.gameMode}
+                    setGameMode={props.setGameMode}
+                    handleNewGame={props.handleNewGame} />}
                 {props.gameMode === "letters" &&
                     <Letters
                         setScore={props.setScore}
@@ -37,6 +42,8 @@ export default function GameWindow(props) {
                         gameModeOrder={props.gameModeOrder}
                         isSingleRound={props.isSingleRound}
                         setIsSingleRound={props.setIsSingleRound} />}
+                {/* <img className="background-img" src={hostimg}>
+                </img> */}
             </div>
         </div>
     )
