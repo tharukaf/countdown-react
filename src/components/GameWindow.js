@@ -7,6 +7,13 @@ import GameInitForm from './GameInitForm'
 
 export default function GameWindow(props) {
 
+    if (props.gameMode !== 0) {
+        props.setShowExitButton(true)
+    }
+    if (props.gameMode === 0) {
+        props.setShowExitButton(false)
+    }
+
     return (
         <div className='game-body'>
             <div className='game-window'>
@@ -19,6 +26,8 @@ export default function GameWindow(props) {
                     handleSingleRoundGameClick={props.handleSingleRoundGameClick}
                     handleLetterCount={props.handleLetterCount}
                     handleNumberCount={props.handleNumberCount}
+                    handlePlayerToggle={props.handlePlayerToggle}
+                    isMultiPlayer={props.isMultiPlayer}
                     setGameModeOrder={props.setGameModeOrder}
                     gameModeOrder={props.setGameModeOrder}
                     gameMode={props.gameMode}

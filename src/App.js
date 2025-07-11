@@ -12,6 +12,8 @@ export default function App() {
   const [score, setScore] = useState('0')
   const [gameModeOrder, setGameModeOrder] = React.useState(['letters', 'numbers'])
   const [isSingleRound, setIsSingleRound] = React.useState(false)
+  const [isMultiPlayer, setIsMultiPlayer] = React.useState(false)
+  const [showExitButton, setShowExitButton] = useState(false)
 
   function handleSingleRoundGameClick({ target }) {
     setIsSingleRound(true)
@@ -20,6 +22,21 @@ export default function App() {
     } else if (target.id === "numbers") {
       setGameMode('numbers')
     }
+  }
+
+  function handlePlayerToggle() {
+    setIsMultiPlayer(prev => !prev)
+  }
+
+  function handleExitGame() {
+    // Reset all game state to initial values
+    setGameMode(0)
+    setLettersRoundCount(1)
+    setNumbersRoundCount(1)
+    setScore('0')
+    setGameModeOrder(['letters', 'numbers'])
+    setIsSingleRound(false)
+    setIsMultiPlayer(false)
   }
 
   function handleLetterCount({ target }) {
@@ -65,21 +82,33 @@ export default function App() {
   }
 
   function handleNewGame() {
+    // Start a new game by using the current game mode order
+    const currentGameModeOrder = [...gameModeOrder]; // Create a copy
 
-    setGameModeOrder(prev => {
-      if (gameModeOrder.length > 0) {
-        setGameMode(prev.shift())
-      } else {
-        setGameMode(0)
-      }
-      return prev
-    })
-    console.log(gameModeOrder)
+    if (currentGameModeOrder.length > 0) {
+      const firstGameMode = currentGameModeOrder.shift();
+      setGameMode(firstGameMode);
+      setGameModeOrder(currentGameModeOrder);
+    } else {
+      // If no game modes are set, default to letters
+      setGameMode('letters');
+    }
+
+    // Reset other game state as needed
+    setScore('0');
+    setIsSingleRound(false);
+
+    console.log('Starting new game with mode:', currentGameModeOrder.length > 0 ? currentGameModeOrder[0] : 'letters');
   }
 
   return (
     <>
-      <TopBar score={score} />
+      <TopBar
+        score={score}
+        isMultiPlayer={isMultiPlayer}
+        onExitGame={handleExitGame}
+        showExitButton={showExitButton}
+      />
       <GameWindow
         gameMode={gameMode}
         setGameMode={setGameMode}
@@ -88,12 +117,17 @@ export default function App() {
         handleSingleRoundGameClick={handleSingleRoundGameClick}
         handleLetterCount={handleLetterCount}
         handleNumberCount={handleNumberCount}
+        handlePlayerToggle={handlePlayerToggle}
         setScore={setScore}
         isSingleRound={isSingleRound}
         setIsSingleRound={setIsSingleRound}
         gameModeOrder={gameModeOrder}
         setGameModeOrder={setGameModeOrder}
-        handleNewGame={handleNewGame} />
+        isMultiPlayer={isMultiPlayer}
+        handleNewGame={handleNewGame}
+        showExitButton={showExitButton}
+        setShowExitButton={setShowExitButton}
+      />
     </>
   )
 }

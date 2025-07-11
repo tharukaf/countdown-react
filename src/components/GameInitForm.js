@@ -9,10 +9,15 @@ export default function GameInitForm(props) {
                 <div>NUMBER OF PLAYERS</div>
                 <div className="player-toggle-section">
                     <div>ONE</div>
-                    <input type="checkbox" id="switch" hidden />
+                    <input
+                        type="checkbox"
+                        id="switch"
+                        checked={props.isMultiPlayer}
+                        onChange={props.handlePlayerToggle}
+                        hidden
+                    />
                     <label htmlFor="switch">Toggle</label>
                     <div>TWO</div>
-
                 </div>
             </div>
             <div className="init-form-mode-section">
