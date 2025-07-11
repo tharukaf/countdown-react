@@ -1,49 +1,54 @@
 .card {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    height: 60px;
-    padding: 10px;
-    margin: 10px 10px 10px 10px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 782;
-    font-size: 40px;
-    line-height: 100px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    letter-spacing: -0.07em;
-    color: #FFFFFF;
-    font-variation-settings: 'slnt' 0;
-    background: #002688;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  padding: 10px;
+  margin: 10px 10px 10px 10px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 782;
+  font-size: 40px;
+  line-height: 100px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: -0.07em;
+  color: #ffffff;
+  font-variation-settings: "slnt" 0;
+  background: #002688;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.card:hover {
+  background: #0033aa;
+  transform: translateY(-2px);
 }
 
 .card-empty {
-    width: 60px;
-    height: 60px;
-    padding: 10px;
-    margin: 10px 10px 10px 10px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 782;
-    font-size: 40px;
-    line-height: 100px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    letter-spacing: -0.07em;
-    overflow: hidden;
-    color: #FFFFFF;
-    font-variation-settings: 'slnt' 0;
-    background-color: #519CBC;
-
+  width: 60px;
+  height: 60px;
+  padding: 10px;
+  margin: 10px 10px 10px 10px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 782;
+  font-size: 40px;
+  line-height: 100px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: -0.07em;
+  overflow: hidden;
+  color: #ffffff;
+  font-variation-settings: "slnt" 0;
+  background-color: #519cbc;
 }
 
 .card-container {
-    display: flex;
-    flex-direction: row;
-    background-color: #F1F1F1;
-
+  display: flex;
+  flex-direction: row;
+  background-color: #f1f1f1;
 }

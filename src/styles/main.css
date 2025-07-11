@@ -289,6 +289,40 @@ text {
     margin: 5px 0 5px 0;
 }
 
+.undo-button {
+    width: 44.6px;
+    height: 42.45px;
+    background: #4a90e2;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 782;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #ffffff;
+    margin: 5px 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.undo-button:hover {
+    background: #357abd;
+}
+
+.undo-button-disabled {
+    background: #cccccc;
+    color: #999999;
+    cursor: not-allowed;
+}
+
+.undo-button-disabled:hover {
+    background: #cccccc;
+}
+
 .answer-board {
     align-self: center;
     justify-self: center;
@@ -351,12 +385,10 @@ text {
     padding: 5px 5px;
     width: 120px;
     color: white;
-    toggle: show;
 }
 
 .accordion>dd {
     margin-bottom: 10px;
-    toggle-visibility: toggle show;
 }
 
 .found-anagram-list {

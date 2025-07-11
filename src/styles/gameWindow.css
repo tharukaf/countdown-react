@@ -364,6 +364,7 @@ label:active:after {
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 .btn-numLetters:hover {
@@ -391,6 +392,12 @@ label:active:after {
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+}
+
+.btn-numLetters-long:hover {
+    background-color: #e4e4e4;
+    transition-duration: 0.2s;
 }
 
 .counter-block {
